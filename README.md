@@ -116,6 +116,7 @@ objeto, resolucion=[256,256]):
     render.film_transparent = True
     image_settings.file_format = 'PNG'
     image_settings.color_mode = 'RGBA'
+    scene.camera = bpy.data.objects.get('Camera')
 
     # CAMBIAR LA ANIMACIÓN EN BLENDER ===
     if objeto.animation_data is None:
