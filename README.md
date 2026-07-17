@@ -4,7 +4,7 @@ Se necesitara el script de sprite_sheet (https://github.com/Daro25/FtsBlender-to
 
 Este repositorio también incluye el escenario blender para una configuración de lucez y camara parecida a la de Clash Royale.
 
-Copia y pega estos códigos en este orden en la consola de blender, asegurate de intalar la libreria re y Image.
+Copia y pega estos códigos en este orden en el Text Editor de Blender y terimas con `Alt` + `P`.
 
 ## Importaciones
 ```Python
