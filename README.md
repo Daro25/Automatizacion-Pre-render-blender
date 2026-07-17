@@ -12,8 +12,8 @@ import math
 import os
 import winsound
 import bpy
-import re
-from PIL import Image
+import re from PIL
+import Image
 
 ```
 ## Spreet-Sheet
