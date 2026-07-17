@@ -189,20 +189,20 @@ if __name__ == "__main__":
   Acciones = [
     {nombre:'Alfil',
     accion:'static',
-    mode:'estatico',
+    mode:'estatico', end:0, start:0,
     angle:[0, 45, -45, 135, -135]},
     {nombre:'Alfil',
     accion:'run',
-    mode:'animacion',
+    mode:'animacion', end:28, start:1,
     angle:[45, -45, 135, -135]},
     {nombre:'Alfil',
     accion:'atack',
-    mode:'animacion',
+    mode:'animacion', end:17, start:1,
     angle:[45, -45, 135, -135]}
   ]
   for accion in Acciones:
     procesar_accion_render(accion.nombre, accion.accion, accion.angle,
-      0,0, accion.mode,
+      accion.start, accion.end, accion.mode,
       FOLDER_BASE, OBJECTO_TARGET, resolucion=[256, 256])
   winsound.Beep(1000, 1000)
 
