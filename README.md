@@ -96,7 +96,7 @@ objeto, resolucion=[256,256]):
     """
     # Si la lista de ángulos está vacía, ignoramos la acción por completo
     if not angulos or len(angulos) == 0:
-        print(f"⚠️ No hay ángulos definidos para la acción '{nombre_accion}'. Saltando...")
+        print(f"No hay ángulos definidos para la acción '{nombre_accion}'. Saltando...")
         return
 
     scene = bpy.context.scene
@@ -121,7 +121,7 @@ objeto, resolucion=[256,256]):
     if not os.path.exists(folder_accion):
         os.makedirs(folder_accion)
 
-    print(f"\n🚀 Iniciando proceso para: {nombre_accion.upper()} ({tipo_render})")
+    print(f"\nIniciando proceso para: {nombre_accion.upper()} ({tipo_render})")
 
     # --- CASO 1: SERIE DE IMÁGENES ESTÁTICAS ---
     if tipo_render == "estatico":
@@ -135,11 +135,11 @@ objeto, resolucion=[256,256]):
             nombre_archivo = f"{contador:04d}.png" 
             render.filepath = os.path.join(folder_accion, nombre_archivo)
             
-            print(f"📸 Renderizando ángulo {rotate}° -> {nombre_archivo}")
+            print(f"Renderizando ángulo {rotate}° -> {nombre_archivo}")
             bpy.ops.render.render(write_still=True)
         
         # Una vez tomadas todas las fotos de los ángulos, creamos el Sprite Sheet global de la acción
-        print("📦 Creando Sprite Sheet estático...")
+        print("Creando Sprite Sheet estático...")
         crear_spritesheet('sprite_sheet',folder_accion, 
         resolucion[0], resolucion[1], len(angulos), eliminar_originales=True)
 
@@ -159,13 +159,13 @@ objeto, resolucion=[256,256]):
             # La ruta de Blender debe terminar con una diagonal o prefijo para que guarde los frames dentro
             render.filepath = os.path.join(folder_angulo_temporal, "")
             
-            print(f"🎬 Renderizando línea de tiempo para ángulo {rotate}°...")
+            print(f"Renderizando línea de tiempo para ángulo {rotate}°...")
             bpy.ops.render.render_animation()
             
             # Calculamos cuántos fotogramas se renderizaron en esa carpeta para definir las columnas
             total_frames = (scene.frame_end - scene.frame_start) + 1
             
-            print(f"📦 Creando Sprite Sheet para animación en ángulo {rotate}°...")
+            print(f"Creando Sprite Sheet para animación en ángulo {rotate}°...")
             crear_spritesheet(str(rotate),folder_angulo_temporal, 
             resolucion[0], resolucion[1], total_frames, eliminar_originales=True)
             
@@ -184,26 +184,52 @@ Usalo así:
 
 ```Python
 if __name__ == "__main__":
-  OBJETO_TARGET = bpy.data.objects.get('Armature.001')
-  FOLDER_BASE = r"C:/Users/windo/Downloads/ajedrezBImg/"
-  Acciones = [
-    {nombre:'Alfil',
-    accion:'static',
-    mode:'estatico', end:0, start:0,
-    angle:[0, 45, -45, 135, -135]},
-    {nombre:'Alfil',
-    accion:'run',
-    mode:'animacion', end:28, start:1,
-    angle:[45, -45, 135, -135]},
-    {nombre:'Alfil',
-    accion:'atack',
-    mode:'animacion', end:17, start:1,
-    angle:[45, -45, 135, -135]}
-  ]
-  for accion in Acciones:
-    procesar_accion_render(accion.nombre, accion.accion, accion.angle,
-      accion.start, accion.end, accion.mode,
-      FOLDER_BASE, OBJECTO_TARGET, resolucion=[256, 256])
-  winsound.Beep(1000, 1000)
+    OBJETO_TARGET = bpy.data.objects.get('Armature.001')
+    FOLDER_BASE = r"C:/Users/windo/Downloads/ajedrezBImg/"
+    
+    # 1. CORRECCIÓN: Claves con comillas para un formato de diccionario válido
+    Acciones = [
+        {
+            'nombre': 'Alfil',
+            'accion': 'static',
+            'mode': 'estatico', 'end': 0, 'start': 0,
+            'angle': [0, 45, -45, 135, -135]
+        },
+        {
+            'nombre': 'Alfil',
+            'accion': 'run',
+            'mode': 'animacion', 'end': 28, 'start': 1,
+            'angle': [45, -45, 135, -135]
+        },
+        {
+            'nombre': 'Alfil',
+            'accion': 'atack',
+            'mode': 'animacion', 'end': 17, 'start': 1,
+            'angle': [45, -45, 135, -135]
+        }
+    ]
+
+    if OBJETO_TARGET is not None:
+        bpy.context.scene.render.fps = 12
+
+        for accion in Acciones:
+            # 2. CORRECCIÓN: Acceso por llaves dicc['clave'] y corrección de OBJETO_TARGET
+            procesar_accion_render(
+                accion['nombre'], 
+                accion['accion'], 
+                accion['angle'],
+                accion['start'], 
+                accion['end'], 
+                accion['mode'],
+                FOLDER_BASE, 
+                OBJETO_TARGET, 
+                resolucion=[256, 256]
+            )
+        
+        # 3. CORRECCIÓN: Requiere 'import winsound' arriba en el archivo
+        winsound.Beep(1000, 1000)
+        print("\n ¡Proceso completado con notificación auditiva!")
+    else:
+        print(" Error: No se encontró 'Armature.001' en la escena.")
 
 ```
