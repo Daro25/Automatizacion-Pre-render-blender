@@ -125,7 +125,7 @@ objeto, resolucion=[256,256]):
     if accion_blender is not None:
         objeto.animation_data.action = accion_blender
         print(f"Animación cambiada con éxito a: '{nombre_accion}'")
-    else:
+    elif tipo_render == "animacion":
         print(f"Alerta: No se encontró la animación '{nombre_accion}' en Blender.")
         return
 
