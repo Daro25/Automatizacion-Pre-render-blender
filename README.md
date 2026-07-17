@@ -158,7 +158,7 @@ objeto, resolucion=[256,256]):
         # Una vez tomadas todas las fotos de los ángulos, creamos el Sprite Sheet global de la acción
         print("Creando Sprite Sheet estático...")
         crear_spritesheet('sprite_sheet',folder_accion, 
-        resolucion[0], resolucion[1], len(angulos), eliminar_originales=True)
+        resolucion[0], resolucion[1], 5, eliminar_originales=True)
 
     # --- CASO 2: ANIMACIÓN COMPLETA DE BLENDER ---
     elif tipo_render == "animacion":
@@ -177,7 +177,7 @@ objeto, resolucion=[256,256]):
             
             print(f"Creando Sprite Sheet para animación en ángulo {rotate}°...")
             crear_spritesheet(str(rotate),folder_accion, 
-            resolucion[0], resolucion[1], total_frames, eliminar_originales=True)
+            resolucion[0], resolucion[1], 5, eliminar_originales=True)
             
             # Opcional: Mover o renombrar el sprite sheet final de esa subcarpeta si lo deseas ordenado de otra forma
             # O eliminar la subcarpeta vacía si eliminar_originales=True la dejó limpia
