@@ -1,6 +1,9 @@
 # Automatizacion-Pre-render-blender
 Script de automatización de pre renderizado de acciones de un modelo 3D para una vista 2D en blender como la de Clash Royale.
-Se necesitara el script de sprite_sheet, (https://github.com/Daro25/FtsBlender-to-Sprite_sheet.git)
+Se necesitara el script de sprite_sheet (https://github.com/Daro25/FtsBlender-to-Sprite_sheet.git).
+
+Este repositorio también incluye el escenario blender para una configuración de lucez y camara parecida a la de Clash Royale
+
 ## Importaciones
 ```Python
 import math
