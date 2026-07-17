@@ -12,8 +12,8 @@ import math
 import os
 import winsound
 import bpy
-import re from PIL
-import Image
+import re
+from PIL import Image
 
 ```
 ## Spreet-Sheet
@@ -247,4 +247,28 @@ if __name__ == "__main__":
     else:
         print(" Error: No se encontró 'Armature.001' en la escena.")
 
+```
+
+## Errores
+```Python
+>>> import re
+>>> from PIL import Image
+Traceback (most recent call last):
+  File "<blender_console>", line 1, in <module>
+ModuleNotFoundError: No module named 'PIL'
+>>>
+```
+Este error se soluciona así:
+1. Abre Blender con privilegios de Administrador (haz clic derecho sobre el ícono de Blender y selecciona "Ejecutar como administrador"). Esto es crucial para que Windows permita escribir en la carpeta de instalación.
+2. Ve a la pestaña de Scripting en la parte superior y localiza la Python Console (la misma ventana interactiva donde te arrojó el error).
+3. Copia y pega el siguiente bloque de código completo en la consola de Blender y presiona Enter:
+```Python
+import subprocess
+import sys
+
+# Obtener la ruta exacta del ejecutable interno de Python de Blender
+python_path = sys.executable
+
+# Instalar Pillow directamente usando pip de forma interna
+subprocess.check_call([python_path, "-m", "pip", "install", "Pillow"])
 ```
