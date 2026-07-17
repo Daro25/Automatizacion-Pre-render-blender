@@ -213,7 +213,6 @@ if __name__ == "__main__":
         bpy.context.scene.render.fps = 12
 
         for accion in Acciones:
-            # 2. CORRECCIÓN: Acceso por llaves dicc['clave'] y corrección de OBJETO_TARGET
             procesar_accion_render(
                 accion['nombre'], 
                 accion['accion'], 
