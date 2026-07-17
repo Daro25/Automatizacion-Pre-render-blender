@@ -206,7 +206,7 @@ if __name__ == "__main__":
         {
             'nombre': 'Alfil',
             'accion': 'static',
-            'mode': 'estatico', 'end': 0, 'start': 0,
+            'mode': 'estatico', 'end': 20, 'start': 1,
             'angle': [0, 45, -45, 135, -135]
         },
         {
