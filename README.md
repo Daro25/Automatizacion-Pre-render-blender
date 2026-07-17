@@ -116,7 +116,6 @@ objeto, resolucion=[256,256]):
     image_settings.color_mode = 'RGBA'
     scene.frame_start = ftStart
     scene.frame_end = ftEnd
-    scene.frame_step = ftStart
 
     # Definir la carpeta destino de esta acción específica (ej: .../ajedrezBImg/staticAlfil)
     folder_accion = os.path.join(folder_base, f"{nombre_accion}{nombre_pieza}")
