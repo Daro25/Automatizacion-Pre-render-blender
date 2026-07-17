@@ -114,8 +114,6 @@ objeto, resolucion=[256,256]):
     render.film_transparent = True
     image_settings.file_format = 'PNG'
     image_settings.color_mode = 'RGBA'
-    scene.frame_start = ftStart
-    scene.frame_end = ftEnd
 
     # CAMBIAR LA ANIMACIÓN EN BLENDER ===
     if objeto.animation_data is None:
@@ -128,6 +126,8 @@ objeto, resolucion=[256,256]):
     elif tipo_render == "animacion":
         print(f"Alerta: No se encontró la animación '{nombre_accion}' en Blender.")
         return
+    scene.frame_start = ftStart
+    scene.frame_end = ftEnd
 
     # Definir la carpeta destino de esta acción específica (ej: .../ajedrezBImg/staticAlfil)
     folder_accion = os.path.join(folder_base, f"{nombre_accion}{nombre_pieza}")
