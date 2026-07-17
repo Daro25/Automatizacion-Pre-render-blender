@@ -117,6 +117,18 @@ objeto, resolucion=[256,256]):
     scene.frame_start = ftStart
     scene.frame_end = ftEnd
 
+    # CAMBIAR LA ANIMACIÓN EN BLENDER ===
+    if objeto.animation_data is None:
+        objeto.animation_data_create()
+    # Buscar la acción por su nombre
+    accion_blender = bpy.data.actions.get(nombre_accion)
+    if accion_blender is not None:
+        objeto.animation_data.action = accion_blender
+        print(f"Animación cambiada con éxito a: '{nombre_accion}'")
+    else:
+        print(f"Alerta: No se encontró la animación '{nombre_accion}' en Blender.")
+        return
+
     # Definir la carpeta destino de esta acción específica (ej: .../ajedrezBImg/staticAlfil)
     folder_accion = os.path.join(folder_base, f"{nombre_accion}{nombre_pieza}")
     
