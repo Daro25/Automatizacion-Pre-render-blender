@@ -165,9 +165,14 @@ objeto, resolucion=[256,256]):
         for rotate in angulos:
             # Rotar el objeto en el eje Z
             objeto.rotation_euler.z = math.radians(rotate)
-
+            # IMPORTANTE: Para animaciones, Blender genera múltiples imágenes (0001.png, 0002.png...).
+            # Creamos una subcarpeta temporal por cada ángulo para que 
+            #crear_spritesheet funcione correctamente sin mezclar archivos.
+            folder_angulo_temporal = os.path.join(folder_accion, f"angulo_{rotate}")
+            if not os.path.exists(folder_angulo_temporal):
+                os.makedirs(folder_angulo_temporal)
             # La ruta de Blender debe terminar con una diagonal o prefijo para que guarde los frames dentro
-            render.filepath = os.path.join(folder_accion, "")
+            render.filepath = os.path.join(folder_angulo_temporal, "")
             
             print(f"Renderizando línea de tiempo para ángulo {rotate}°...")
             bpy.ops.render.render(animation=True)
@@ -176,13 +181,13 @@ objeto, resolucion=[256,256]):
             total_frames = (scene.frame_end - scene.frame_start) + 1
             
             print(f"Creando Sprite Sheet para animación en ángulo {rotate}°...")
-            crear_spritesheet(str(rotate),folder_accion, 
+            crear_spritesheet(str(rotate),folder_angulo_temporal, 
             resolucion[0], resolucion[1], 5, eliminar_originales=True)
             
             # Opcional: Mover o renombrar el sprite sheet final de esa subcarpeta si lo deseas ordenado de otra forma
             # O eliminar la subcarpeta vacía si eliminar_originales=True la dejó limpia
             try:
-                os.rmdir(folder_accion)
+                os.rmdir(folder_angulo_temporal)
             except OSError:
                 pass
 
