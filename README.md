@@ -201,8 +201,6 @@ Usalo así:
 if __name__ == "__main__":
     OBJETO_TARGET = bpy.data.objects.get('Armature.001')
     FOLDER_BASE = r"C:/Users/windo/Downloads/ajedrezBImg/"
-    
-    # 1. CORRECCIÓN: Claves con comillas para un formato de diccionario válido
     Acciones = [
         {
             'nombre': 'Alfil',
